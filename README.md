@@ -1,4 +1,4 @@
-# VRC Comfort
+# VRC Comfort   WIP
 
 VRChat lacks accessibility and comfort options. I aim to fix this without resorting to Modifying the client. Why? Because i suffer from vision sensitivity and VRChat refuses to offer any accessibility options.
 
