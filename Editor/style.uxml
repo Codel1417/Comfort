@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement style="height: 452px; width: auto;">
+        <ui:Label text="Hello There" />
+        <uie:ObjectField label="Avatar" binding-path="avatar" />
+        <ui:Toggle label="Write Defaults" name="writeDefaults" binding-path="writeDefaults" />
+        <ui:Button text="Setup Avatar" style="height: 37px;" />
+        <ui:Button text="Github" name="Github" tooltip="Open github" style="justify-content: flex-start; bottom: -1px; top: auto; flex-direction: column; flex-wrap: nowrap; align-items: auto; position: absolute; left: 0; flex-grow: initial; width: 99%; height: 46px; flex-shrink: initial;" />
+    </ui:VisualElement>
+</ui:UXML>
