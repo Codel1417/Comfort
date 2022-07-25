@@ -33,4 +33,4 @@ This is simply a collider to block unity flare effects.
 
 ### Also See
 
-* [Flux Bloom Removal Shader by Rollthered](https://rollthered.booth.pm/items/3092302) | This clamps bloom
+* [Flux Bloom Removal Shader by Rollthered](https://rollthered.booth.pm/items/3092302) | This clamps bloom wihout removing other post processing effects
