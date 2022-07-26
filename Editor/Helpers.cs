@@ -10,20 +10,19 @@ namespace Comfort.Editor
 {
     public static class Helpers
     {
-        public static GameObject GetSelectedAvatar()
+        public static VRCAvatarDescriptor GetSelectedAvatar()
         {
             GameObject selected = Selection.activeGameObject;
-            if (IsValidAvatar(selected))
+            if ( selected != null)
             {
-               return selected;
+               return selected.GetComponent<VRCAvatarDescriptor>();
             }
             // else check hierarchy for a valid avatar
-            GameObject avatar = Object.FindObjectOfType<VRCAvatarDescriptor>().gameObject;
-            if (IsValidAvatar(avatar))
+            VRCAvatarDescriptor avatar = Object.FindObjectOfType<VRCAvatarDescriptor>();
+            if (avatar != null)
             {
                 return avatar;
             }
-
             return null;
         }
 
@@ -66,7 +65,7 @@ namespace Comfort.Editor
             Debug.Log("Added parameter: " + parameterName);
         }
 
-        public static void CreateGrabPassSphere(GameObject avatar, string parameterName)
+        public static void CreateGrabPassSphere(VRCAvatarDescriptor avatar, string parameterName, string shader)
         {
             GameObject root = avatar.transform.Find(parameterName).gameObject;
             Transform grabPassSphere = root.transform.Find("GrabPassSphere");
@@ -84,7 +83,7 @@ namespace Comfort.Editor
                 Object.DestroyImmediate(collider);
             }
             MeshRenderer renderer = grabPassSphere.GetComponent<MeshRenderer>();
-            renderer.sharedMaterial = new Material(Shader.Find("Codel1417/PrePostProcess Capture"));
+            renderer.sharedMaterial = new Material(Shader.Find(shader));
         }
         public static void AddAnimatorStates(GameObject avatar, string parameterName, AnimationClip emable, AnimationClip disable, bool writeDefaults = true)
         {
@@ -152,22 +151,17 @@ namespace Comfort.Editor
 
         public static void SetUpConstraint(GameObject avatar, string parameterName)
         {
-            if (avatar.GetComponentsInChildren<Transform>().Any(x => parameterName == x.name))
+            Transform target = avatar.transform.Find(parameterName);
+            if (target == null)
             {
-                return;
+                target = new GameObject(parameterName).transform;
+                target.parent = avatar.transform;
             }
-            GameObject target = new GameObject
-            {
-                transform =
-                {
-                    parent = avatar.transform
-                }
-            };
+
             GameObject head = avatar.GetComponent<Animator>().GetBoneTransform(HumanBodyBones.Head).gameObject;
             target.transform.position = head.transform.position;
-            target.SetActive(false);
-            target.name = parameterName;
-            ParentConstraint parentConstraint = target.AddComponent<ParentConstraint>();
+            target.gameObject.SetActive(false);
+            ParentConstraint parentConstraint = target.gameObject.AddComponent<ParentConstraint>();
             ConstraintSource source = new ConstraintSource
             {
                 sourceTransform = head.transform,
@@ -177,31 +171,25 @@ namespace Comfort.Editor
             parentConstraint.weight = 1;
             parentConstraint.constraintActive = true;
         }
-        public static bool IsValidAvatar(GameObject obj)
-        {
-            if (obj == null)
-            {
-                Debug.LogError("No avatar selected");
-                return false;
-            }
-            if (obj.GetComponent<Animator>() == null)
-            {
-                Debug.LogError("No avatar selected");
-                return false;
-            }
-            if (obj.GetComponent<VRCAvatarDescriptor>() == null)
-            {
-                Debug.LogError("No avatar selected");
-                return false;
-            }
-            Debug.Log("Valid avatar selected");
-            return true;
-        }
-
-        public static bool IsValidAvatar(VRCAvatarDescriptor evtNewValue)
-        {
-            return IsValidAvatar(evtNewValue.gameObject);
-        }
         
+        public static bool isWriteDefaults(VRCAvatarDescriptor avatar)
+        {
+            // check animator to get if write defaults is enabled
+            foreach (VRCAvatarDescriptor.CustomAnimLayer layer in avatar.baseAnimationLayers)
+            {
+                AnimatorController animator = (AnimatorController) layer.animatorController;
+                if (animator != null)
+                {
+                    foreach (AnimatorControllerLayer layer2 in animator.layers)
+                    {
+                        if (layer2.stateMachine.defaultState.writeDefaultValues)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
