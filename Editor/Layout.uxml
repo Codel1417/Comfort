@@ -1,0 +1,38 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="help" class="unity-box infoBox">
+        <Style src="style.uss" />
+        <ui:Label text="Please select the avatar" />
+        <ui:Image src="d_console.erroricon" />
+    </ui:VisualElement>
+    <uie:ObjectField label="Avatar" name="avatarField" binding-path="_avatar">
+        <Style src="style.uss" />
+    </uie:ObjectField>
+    <ui:VisualElement name="toggles">
+        <Style src="style.uss" />
+        <ui:Label text="Available Options" name="toggleHeader" style="flex-wrap: nowrap; justify-content: flex-start; align-items: flex-start; -unity-text-align: upper-left; -unity-font-style: bold; flex-direction: column; width: 100%;" />
+        <ui:Toggle label="Post Processing Toggle" name="postToggle" binding-path="postProcessingBlocker" tooltip="Uses a camera to disable post processing" />
+        <ui:Toggle label="Audio Link Blocker" name="audioLinkToggle" binding-path="audiolink" tooltip="uses a shader to locally block AudioLink" />
+        <ui:Toggle label="Block Sun Flare" name="flareToggle" binding-path="flareBlocker" tooltip="Uses a collider to block Unity Flare"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="info" class="infoBox unity-box" style="-unity-text-align: upper-left; align-items: center; flex-direction: row;">
+        <Style src="style.uss" />
+        <ui:VisualElement style="width: 342px;">
+            <ui:Label text="Clicking Setup Will" style="flex-direction: row; -unity-font-style: bold;" />
+            <ui:Label text="* Create The Required components&#10;* Setup Animations&#10;* Create the required parameters" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Button text="Setup" name="setupButton" class="setupButton">
+        <Style src="style.uss" />
+    </ui:Button>
+    <ui:Button text="Github" name="githubButton">
+        <Style src="style.uss" />
+    </ui:Button>
+    <ui:Foldout text="Performance Stats" value="false" name="perfStatsFoldout" style="visibility: hidden;">
+        <Style src="style.uss" />
+        <uie:IntegerField label="Parameters" value="42" readonly="true" name="paramCount" />
+        <uie:IntegerField label="Meshes" value="42" name="meshCount" readonly="true" />
+        <uie:IntegerField label="Materials" value="42" name="materialCount" readonly="true" />
+        <uie:IntegerField label="Cameras" value="42" name="cameraCount" readonly="true" />
+        <uie:IntegerField label="Colliders" value="42" readonly="true" name="colliderCount" />
+    </ui:Foldout>
+</ui:UXML>
