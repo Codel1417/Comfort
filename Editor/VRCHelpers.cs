@@ -98,19 +98,18 @@ namespace Comfort.Editor
                         name = parameterName,
                     }
                 });
-                string avatarPath = AssetDatabase.GetAssetPath(expressionsMenu);
-                avatarPath = avatarPath.Substring(0, avatarPath.LastIndexOf("/", StringComparison.Ordinal));
-                if (AssetDatabase.LoadAssetAtPath(avatarPath + "/" + submenu.name + ".asset", typeof(VRCExpressionsMenu)))
-                {
-                    AssetDatabase.SaveAssets();
-                }
-                else
-                {
-                    AssetDatabase.CreateAsset(submenu.subMenu, $"{avatarPath}/ComfortMenu.asset");
-                }
+            }
+            string avatarPath = AssetDatabase.GetAssetPath(expressionsMenu);
+            avatarPath = avatarPath.Substring(0, avatarPath.LastIndexOf("/", StringComparison.Ordinal));
+            if (AssetDatabase.LoadAssetAtPath(avatarPath + "/" + submenu.name + ".asset", typeof(VRCExpressionsMenu)))
+            {
                 AssetDatabase.SaveAssets();
             }
-
+            else
+            {
+                AssetDatabase.CreateAsset(submenu.subMenu, $"{avatarPath}/Comfort.asset");
+            }
+            AssetDatabase.SaveAssets();
         }
     }
 }

@@ -12,13 +12,13 @@
         <ui:Label text="Available Options" name="toggleHeader" style="flex-wrap: nowrap; justify-content: flex-start; align-items: flex-start; -unity-text-align: upper-left; -unity-font-style: bold; flex-direction: column; width: 100%;" />
         <ui:Toggle label="Post Processing Toggle" name="postToggle" binding-path="postProcessingBlocker" tooltip="Uses a camera to disable post processing" />
         <ui:Toggle label="Audio Link Blocker" name="audioLinkToggle" binding-path="audiolink" tooltip="uses a shader to locally block AudioLink" />
-        <ui:Toggle label="Block Sun Flare" name="flareToggle" binding-path="flareBlocker" tooltip="Uses a collider to block Unity Flare"/>
+        <ui:Toggle label="Block Sun Flare" name="flareToggle" binding-path="flareBlocker" tooltip="Uses a collider to block Unity Flare" />
     </ui:VisualElement>
     <ui:VisualElement name="info" class="infoBox unity-box" style="-unity-text-align: upper-left; align-items: center; flex-direction: row;">
         <Style src="style.uss" />
         <ui:VisualElement style="width: 342px;">
             <ui:Label text="Clicking Setup Will" style="flex-direction: row; -unity-font-style: bold;" />
-            <ui:Label text="* Create The Required components&#10;* Setup Animations&#10;* Create the required parameters" />
+            <ui:Label text="* Create The Required components&#10;* Setup Animations&#10;* Create the required parameters&#10;* Create a SubMenu" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:Button text="Setup" name="setupButton" class="setupButton">

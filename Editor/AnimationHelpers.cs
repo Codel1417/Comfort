@@ -39,7 +39,15 @@ namespace Comfort.Editor
 
             // add the animator state
             AnimatorStateMachine stateMachine = layer.stateMachine;
-
+            if (stateMachine == null)
+            {
+                stateMachine = new AnimatorStateMachine
+                {
+                    name = parameterName
+                };
+                layer.stateMachine = stateMachine;
+            }
+            
             if (animMode == AnimMode.Toggle)
             {
                 AnimatorState notBlocked = stateMachine.AddState(parameterName + " Not Blocked");

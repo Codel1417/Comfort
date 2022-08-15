@@ -15,10 +15,7 @@ namespace Comfort.Editor
         [SerializeField] VisualTreeAsset visualTree;
 
         //Consts
-        private string _parameterName = "";
         [SerializeField] private VRCAvatarDescriptor _avatar;
-        private AnimationClip _enabledAnimation;
-        private AnimationClip _disabledAnimation;
         [SerializeField] private bool postProcessingBlocker = true;
         [SerializeField] private bool audiolink = true;
         [SerializeField] private bool flareBlocker = true;
@@ -80,47 +77,47 @@ namespace Comfort.Editor
                 bool writeDefaults = AnimationHelpers.IsWriteDefaults(_avatar);
                 if (postProcessingBlocker)
                 {
-                    _parameterName = "Post Processing Blocker";
-                    _enabledAnimation = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+                    string parameterName = "Post Processing Blocker";
+                    AnimationClip enabledAnimation = AssetDatabase.LoadAssetAtPath<AnimationClip>(
                         "Assets/Comfort/Post Processing Blocker/Animations/Enable Post Processing Blocker.anim");
-                    _disabledAnimation = AssetDatabase.LoadAssetAtPath<AnimationClip>(
+                    AnimationClip disabledAnimation = AssetDatabase.LoadAssetAtPath<AnimationClip>(
                         "Assets/Comfort/Post Processing Blocker/Animations/Enable Post Processing Blocker.anim");
-                    SetupBase(_avatar, _parameterName, AnimationHelpers.AnimMode.Toggle, writeDefaults, _enabledAnimation, _disabledAnimation);
-                    Helpers.CreateGrabPassSphere(_avatar, _parameterName, "Codel1417/PrePostProcess Capture");
-                    Helpers.SetUpCamera(_avatar, _parameterName);
-                    Helpers.SetUpCameraOverlay(_avatar, _parameterName);
-                    Helpers.SetScale(_avatar, _parameterName);
+                    SetupBase(_avatar, parameterName, AnimationHelpers.AnimMode.Toggle, writeDefaults, enabledAnimation, disabledAnimation);
+                    Helpers.CreateGrabPassSphere(_avatar, parameterName, "Codel1417/PrePostProcess Capture");
+                    Helpers.SetUpCamera(_avatar, parameterName);
+                    Helpers.SetUpCameraOverlay(_avatar, parameterName);
+                    Helpers.SetScale(_avatar, parameterName);
                 }
 
                 if (audiolink)
                 {
-                    _parameterName = "Audio Link Blocker";
-                    _enabledAnimation =
+                    string parameterName = "Audio Link Blocker";
+                    AnimationClip enabledAnimation =
                         AssetDatabase.LoadAssetAtPath<AnimationClip>(
                             "Assets/Comfort/Audiolink Blocker/Animations/Disable AudioLinkBlocker.anim");
-                    _disabledAnimation =
+                    AnimationClip disabledAnimation =
                         AssetDatabase.LoadAssetAtPath<AnimationClip>(
                             "Assets/Comfort/Audiolink Blocker/Animations/Enable AudioLinkBlocker.anim");
-                    SetupBase(_avatar, _parameterName, AnimationHelpers.AnimMode.Toggle, writeDefaults, _enabledAnimation, _disabledAnimation);
-                    Helpers.CreateGrabPassSphere(_avatar, _parameterName, "Codel1417/AudioLink Blocker");
+                    SetupBase(_avatar, parameterName, AnimationHelpers.AnimMode.Toggle, writeDefaults, enabledAnimation, disabledAnimation);
+                    Helpers.CreateGrabPassSphere(_avatar, parameterName, "Codel1417/AudioLink Blocker");
                 }
 
                 if (flareBlocker)
                 {
-                    _enabledAnimation =
+                    AnimationClip enabledAnimation =
                         AssetDatabase.LoadAssetAtPath<AnimationClip>(
                             "Assets/Comfort/Flare/Animations/Enable Flare Collider.anim");
-                    _disabledAnimation =
+                    AnimationClip disabledAnimation =
                         AssetDatabase.LoadAssetAtPath<AnimationClip>(
                             "Assets/Comfort/Flare/Animations/Disable Flare Collider.anim");
-                    _parameterName = "Flare Blocker";
-                    SetupBase(_avatar, _parameterName, AnimationHelpers.AnimMode.Toggle, writeDefaults, _enabledAnimation, _disabledAnimation);
-                    Helpers.AddCollider(_avatar, _parameterName);
+                    string parameterName = "Flare Blocker";
+                    SetupBase(_avatar, parameterName, AnimationHelpers.AnimMode.Toggle, writeDefaults, enabledAnimation, disabledAnimation);
+                    Helpers.AddCollider(_avatar, parameterName);
                 }
             }
         }
 
-        public static void SetupBase(VRCAvatarDescriptor avatarDescriptor, String parameterName,
+        public static void SetupBase(VRCAvatarDescriptor avatarDescriptor, string parameterName,
             AnimationHelpers.AnimMode animMode, bool writeDefaults, AnimationClip enabledAnimation, AnimationClip disabledAnimation)
         {
             Undo.RecordObject(avatarDescriptor, "Setup " + parameterName);
