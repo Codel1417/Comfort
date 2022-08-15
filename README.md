@@ -1,6 +1,6 @@
 # VRC Comfort   WIP
 
-VRChat lacks accessibility and comfort options. I aim to fix this without resorting to Modifying the client. Why? Because I suffer from vision sensitivity and VRChat currently does not offer any accessibility options that I can benefit from.
+VRChat lacks accessibility and comfort options that I can benefit from. I aim to fix this without resorting to modifying the client. Why? Because I suffer from vision sensitivity and VRChat currently does not offer any accessibility options that I can benefit from.
 
 ### Why is this needed?
 
@@ -24,13 +24,20 @@ These tools are all local to you and do not affect other users.
 
 This disables post processing completely. The downside is Nameplates are also hidden.
 
+![Before & After of toggling post processing off](Editor/_Media/PostProcessingToggleResultpng.png)
+
 ### AudioLink Blocker
 
 This disables most AudioLink features to reduce motion in the world. This only works for the GrabPass version of AudioLink.
 
+![Before & After of toggling audiolink off](Editor/_Media/AudioLinkToggleResult.png)
+
 ### Sun flare blocker
 
 This is simply a collider to block unity flare effects.
+
+![Before & After of toggling sun flare off](Editor/_Media/SunFlareToggleResult.png)
+
 
 ## How to use
 
