@@ -1,8 +1,12 @@
-﻿using UnityEditor;
+﻿using System;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Rendering;
 using VRC.SDK3.Avatars.Components;
+using VRC.SDK3.Avatars.ScriptableObjects;
+using Object = UnityEngine.Object;
 
 namespace Comfort.Editor
 {
@@ -26,20 +30,20 @@ namespace Comfort.Editor
             return null;
         }
 
-        public static void CreateGrabPassSphere(VRCAvatarDescriptor avatar, string parameterName, string shader)
+        public static void CreateGrabPassSphere(VRCAvatarDescriptor avatar, string parameterName, string materialPath)
         {
             GameObject root = avatar.transform.Find(parameterName).gameObject;
             Transform grabPassSphere = root.transform.Find("GrabPassSphere");
             if (grabPassSphere == null)
             {
-                grabPassSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
+                grabPassSphere = GameObject.CreatePrimitive(PrimitiveType.Cube).transform;
                 grabPassSphere.parent = root.transform;
                 grabPassSphere.localPosition = Vector3.zero;
                 grabPassSphere.localRotation = Quaternion.identity;
                 grabPassSphere.localScale = Vector3.one;
                 grabPassSphere.name = "GrabPassSphere";
             }
-
+            
             Collider collider = grabPassSphere.GetComponent<Collider>();
             if (collider != null)
             {
@@ -47,7 +51,18 @@ namespace Comfort.Editor
             }
 
             MeshRenderer renderer = grabPassSphere.GetComponent<MeshRenderer>();
-            renderer.sharedMaterial = new Material(Shader.Find(shader));
+            Material material = AssetDatabase.LoadAssetAtPath<Material>(materialPath);
+            material.name = parameterName + "Material";
+            renderer.sharedMaterial = material;
+            
+            renderer.shadowCastingMode = ShadowCastingMode.Off;
+            renderer.lightProbeUsage = LightProbeUsage.Off;
+            renderer.reflectionProbeUsage = ReflectionProbeUsage.Off;
+            renderer.motionVectorGenerationMode = MotionVectorGenerationMode.ForceNoMotion;
+            renderer.lightProbeUsage = LightProbeUsage.Off;
+            renderer.allowOcclusionWhenDynamic = false;
+            renderer.receiveShadows = false;
+
         }
         
         public static void SetUpConstraint(VRCAvatarDescriptor avatar, string parameterName)
@@ -59,9 +74,9 @@ namespace Comfort.Editor
                 target.parent = avatar.transform;
             }
 
-            GameObject head = avatar.GetComponent<Animator>().GetBoneTransform(HumanBodyBones.Head)
-                .gameObject; //todo: Get view ball
-            target.transform.position = head.transform.position;
+            Transform headTransform = avatar.GetComponent<Animator>().GetBoneTransform(HumanBodyBones.Head);
+
+            target.transform.position = headTransform.position;
             target.gameObject.SetActive(false);
 
             ParentConstraint parentConstraint = target.gameObject.GetComponent<ParentConstraint>();
@@ -69,14 +84,18 @@ namespace Comfort.Editor
             {
                 parentConstraint = target.gameObject.AddComponent<ParentConstraint>();
             }
-
             ConstraintSource source = new ConstraintSource
             {
-                sourceTransform = head.transform,
+                sourceTransform = headTransform,
                 weight = 1
             };
+            List<ConstraintSource> sources = new List<ConstraintSource> {};
+            parentConstraint.GetSources(sources);
+            if (!sources.Contains(source))
+            {
+                parentConstraint.AddSource(source);
+            }
             parentConstraint.weight = 1;
-            parentConstraint.AddSource(source);
             parentConstraint.constraintActive = true;
         }
         public static void SetUpCameraOverlay(VRCAvatarDescriptor avatar, string parameterName)
@@ -141,7 +160,7 @@ namespace Comfort.Editor
                         parent = root.transform,
                         localPosition = Vector3.zero,
                         localRotation = Quaternion.identity
-                    }
+                    },
                 };
                 camera = cameraObject.AddComponent<Camera>();
             }
@@ -152,7 +171,7 @@ namespace Comfort.Editor
             camera.allowDynamicResolution = false;
             camera.nearClipPlane = 9000f;
             camera.farClipPlane = 11000f;
-            camera.depth = 0f;
+            camera.depth = 100f;
             camera.cullingMask = 1 << LayerMask.NameToLayer("PlayerLocal");
         }
         public static void AddCollider(VRCAvatarDescriptor avatar, string parameterName)

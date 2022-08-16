@@ -81,9 +81,9 @@ namespace Comfort.Editor
                     AnimationClip enabledAnimation = AssetDatabase.LoadAssetAtPath<AnimationClip>(
                         "Assets/Comfort/Post Processing Blocker/Animations/Enable Post Processing Blocker.anim");
                     AnimationClip disabledAnimation = AssetDatabase.LoadAssetAtPath<AnimationClip>(
-                        "Assets/Comfort/Post Processing Blocker/Animations/Enable Post Processing Blocker.anim");
+                        "Assets/Comfort/Post Processing Blocker/Animations/Disable Post Processing Blocker.anim");
                     SetupBase(_avatar, parameterName, AnimationHelpers.AnimMode.Toggle, writeDefaults, enabledAnimation, disabledAnimation);
-                    Helpers.CreateGrabPassSphere(_avatar, parameterName, "Codel1417/PrePostProcess Capture");
+                    Helpers.CreateGrabPassSphere(_avatar, parameterName, "Assets/Comfort/Post Processing Blocker/Materials/ScreenCapture.mat");
                     Helpers.SetUpCamera(_avatar, parameterName);
                     Helpers.SetUpCameraOverlay(_avatar, parameterName);
                     Helpers.SetScale(_avatar, parameterName);
@@ -91,15 +91,15 @@ namespace Comfort.Editor
 
                 if (audiolink)
                 {
-                    string parameterName = "Audio Link Blocker";
+                    string parameterName = "AudioLink Blocker";
                     AnimationClip enabledAnimation =
                         AssetDatabase.LoadAssetAtPath<AnimationClip>(
-                            "Assets/Comfort/Audiolink Blocker/Animations/Disable AudioLinkBlocker.anim");
+                            "Assets/Comfort/Audiolink Blocker/Animations/Enable AudioLinkBlocker.anim");
                     AnimationClip disabledAnimation =
                         AssetDatabase.LoadAssetAtPath<AnimationClip>(
-                            "Assets/Comfort/Audiolink Blocker/Animations/Enable AudioLinkBlocker.anim");
+                            "Assets/Comfort/Audiolink Blocker/Animations/Disable AudioLinkBlocker.anim");
                     SetupBase(_avatar, parameterName, AnimationHelpers.AnimMode.Toggle, writeDefaults, enabledAnimation, disabledAnimation);
-                    Helpers.CreateGrabPassSphere(_avatar, parameterName, "Codel1417/AudioLink Blocker");
+                    Helpers.CreateGrabPassSphere(_avatar, parameterName, "Assets/Comfort/Audiolink Blocker/Material/AudioLinkiJammer.mat");
                 }
 
                 if (flareBlocker)

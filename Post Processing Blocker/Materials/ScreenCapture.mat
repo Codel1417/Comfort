@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RT Overlay
-  m_Shader: {fileID: 4800000, guid: 4c02af0f434646a45962a11d75ec6e53, type: 3}
+  m_Name: ScreenCapture
+  m_Shader: {fileID: 4800000, guid: 15f6cb59176c4c1ba2a536e79c4159b4, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 4999
