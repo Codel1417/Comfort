@@ -16,6 +16,7 @@ The issue this solves is something I suffer with every day. I suffer from vision
 * https://feedback.vrchat.com/feature-requests/p/toggle-to-disable-bloom-and-other-post-process-effects
 * https://feedback.vrchat.com/feature-requests/p/option-to-disable-postprocessing-clientside
 * https://feedback.vrchat.com/feature-requests/p/disable-post-processing-stack
+* https://feedback.vrchat.com/open-beta/p/1236-gamma-slider
 * Might Benefit? https://feedback.vrchat.com/feature-requests/p/anti-epilepsy-option
 
 ## Included Tools
