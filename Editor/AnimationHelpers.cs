@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 using VRC.SDK3.Avatars.Components;
@@ -88,7 +89,7 @@ namespace Comfort.Editor
                 animatorState.motion = blendTree;
             }
 
-
+            EditorUtility.SetDirty(animatorController);
             Debug.Log("Added animator states for " + parameterName);
         }
         public static bool IsWriteDefaults(VRCAvatarDescriptor avatar)
@@ -96,12 +97,13 @@ namespace Comfort.Editor
             // check animator to get if write defaults is enabled
             foreach (VRCAvatarDescriptor.CustomAnimLayer layer in avatar.baseAnimationLayers)
             {
-                AnimatorController animator = (AnimatorController)layer.animatorController;
-                if (animator != null)
+                if (layer.animatorController != null)
                 {
+                    AnimatorController animator = (AnimatorController)layer.animatorController;
+
                     foreach (AnimatorControllerLayer layer2 in animator.layers)
                     {
-                        if (layer2.stateMachine.defaultState.writeDefaultValues)
+                        if (layer2.stateMachine != null && layer2.stateMachine.defaultState != null && layer2.stateMachine.defaultState.writeDefaultValues)
                         {
                             return true;
                         }

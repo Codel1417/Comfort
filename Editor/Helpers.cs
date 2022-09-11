@@ -165,14 +165,10 @@ namespace Comfort.Editor
                 camera = cameraObject.AddComponent<Camera>();
             }
 
-            camera.clearFlags = CameraClearFlags.Color;
-            camera.backgroundColor = Color.black;
-            camera.allowMSAA = false;
-            camera.allowDynamicResolution = false;
             camera.nearClipPlane = 9000f;
             camera.farClipPlane = 11000f;
-            camera.depth = 100f;
-            camera.cullingMask = 1 << LayerMask.NameToLayer("PlayerLocal");
+            camera.depth = 0f;
+            camera.cullingMask = ~(1 << LayerMask.NameToLayer("MirrorReflection"));
         }
         public static void AddCollider(VRCAvatarDescriptor avatar, string parameterName)
         {
