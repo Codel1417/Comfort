@@ -2,8 +2,6 @@
 
 VRChat lacks accessibility and comfort options that I can benefit from. I aim to fix this without resorting to modifying the client. Why? Because I suffer from vision sensitivity and VRChat currently does not offer any accessibility options that I can benefit from.
 
-# GAMMA IS NOT THE SAME AS BRIGHTNESS
-
 ### Why is this needed?
 
 There are too many VRChat worlds that do not offer options to disable/control Post Processing or AudioLink, Or the world added controls but they are insufficient. To some people these are minor things or can affect the "experience" of the world and therefor should not be added to the game but I disagree. Attempts to convince the developers of VRChat to add a post processing toggle have been met with pushback. The devs believe an additive solution would be better instead of overriding the world settings but I have found this does not help me.
