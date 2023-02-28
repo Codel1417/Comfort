@@ -1,6 +1,6 @@
 # VRC Comfort
 
-VRChat lacks accessibility and comfort options that I can benefit from. I aim to fix this without resorting to modifying the client. Why? Because I suffer from vision sensitivity and VRChat currently does not offer any accessibility options that are stable and beneficial to my needs.
+VRChat lacks accessibility and comfort options that I can benefit from. I aim to fix this withing the limits of an avatar. Why? Because I suffer from vision sensitivity and VRChat currently does not offer any accessibility options that are stable and beneficial to my needs.
 
 ### Why is this needed?
 
