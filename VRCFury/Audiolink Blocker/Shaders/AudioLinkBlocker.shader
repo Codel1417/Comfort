@@ -36,5 +36,9 @@
         {
             "_AudioTexture"
         }
+        GrabPass
+        {
+           "_Stored"
+        }
     }
 }

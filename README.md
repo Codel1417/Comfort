@@ -33,23 +33,11 @@ This disables most AudioLink features to reduce motion in the world. This only w
 
 ![Before & After of toggling audiolink off](Editor/_Media/AudioLinkToggleResult.png)
 
-### Sun flare blocker
-
-This is simply a collider to block unity flare effects.
-
-![Before & After of toggling sun flare off](Editor/_Media/SunFlareToggleResult.png "Project Summer Unflared")
-
-
 ## How to use
 
+* Import [VRCFury](https://gitlab.com/VRCFury/VRCFury)
 * Import the Unity package
-* Go to `Tools/Setup Comfort System`
-
-![Comfort UI Listing the available options](Editor/_Media/ComfortMenuUI.png)
-
-* Set your avatar
-* Check which features you want to enable
-* Click 'Setup'
+* Drag prefab to the root of your avatar. Prefabs are located at `Assets/Comfort/VRCFury/`
 
 ### Also See
 
